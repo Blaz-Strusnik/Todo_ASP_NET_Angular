@@ -1,0 +1,97 @@
+
+
+
+
+    <div class="container">
+      <div class="alert alert-info" role="alert" *ngIf="dataSaved" style="font-size:20px;font-weight:bold" Class="success" align="left">
+        {{massage}}
+      </div>
+<div class="m-5">
+
+  </div>
+
+  <form [formGroup]="taskForm"(ngSubmit)="onFormSubmit()">
+
+<div class="row h-100">
+  <div class="col-auto">
+                  <input class="form-control ms-3 mb-3" formControlName="Task" matTooltip="Enter task name" matInput placeholder="Task Name">
+
+
+
+                <mat-error>
+                  <span *ngIf="!taskForm.get('Task').value && taskForm.get('Task').touched"></span>
+                </mat-error>
+              </div>
+
+
+
+              <div class="col-auto">
+                  <input class="form-control ms-3 mb-3" formControlName="Description" matTooltip="Enter Task Description" matInput placeholder="Task Description">
+
+
+
+                <mat-error>
+                  <span *ngIf="!taskForm.get('Description').value && taskForm.get('Description').touched"></span>
+                </mat-error>
+              </div>
+
+
+              <div class="col-auto">
+
+                  <input type="datetime-local" class="form-control ms-3 mb-3" matTooltip="Enter Start Date" formControlName="StartDate"placeholder="Choose Date">
+
+
+                <mat-error>
+                  <span *ngIf="!taskForm.get('StartDate').value && taskForm.get('StartDate').touched"></span>
+                </mat-error>
+
+              </div>
+              <div class="col-auto">
+
+                  <input type="datetime-local" class="form-control ms-3 mb-3" matTooltip="Enter End Date" formControlName="EndDate" placeholder="Choose Date">
+
+
+
+                <mat-error>
+                  <span *ngIf="!taskForm.get('EndDate').value && taskForm.get('EndDate').touched"></span>
+                </mat-error>
+              </div>
+              <div class="col-auto">
+
+                <button type="submit" class="btn btn-primary ms-5" matTooltip="Click Submit Button">Submit</button>
+                <button type="reset"  class="btn btn-danger ms-3" matTooltip="Click Reset Button" (click)="resetForm()">Reset</button>
+
+
+                </div>
+              </div>
+
+              </form>
+
+
+            <table class="table table-striped">
+              <thead>
+              <tr>
+                <th scope="col">Task Name</th>
+                <th scope="col">Task Description</th>
+                <th scope="col">Start Date</th>
+                <th scope="col">End Date</th>
+                <th scope="col"></th>
+                <th scope="col"></th>
+              </tr>
+            </thead>
+            <tbody >
+              <tr *ngFor="let task of allTasks | async">
+                <td class="text-break">{{task.Task}}</td>
+                <td class="text-break">{{task.Description}}</td>
+                <td>{{task.StartDate | date:"dd.MM.yyyy H:m" }}</td>
+                <td>{{task.EndDate | date:"dd.MM.yyyy H:m"  }}</td>
+                <td>
+                  <button type="button" class="btn btn-primary" matTooltip="Click Edit Button"(click)="loadTaskToEdit(task.id)">Edit</button>
+                </td>
+                <td>
+                  <button type="button" class="btn btn-danger" matTooltip="Click Delete Button"(click)="deleteTask(task.id)">Delete</button>
+                </td>
+              </tr>
+            </tbody>
+            </table>
+          </div>
