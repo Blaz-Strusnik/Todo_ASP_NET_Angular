@@ -1,2 +1,3 @@
 *.cs linguist-language=ture
 *.ts linguist-language=ture
+*.js linguist-language=C#
